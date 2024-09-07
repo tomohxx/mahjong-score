@@ -113,7 +113,8 @@ namespace player_impl {
 
   class Player {
   private:
-    static constexpr int LIMIT = 1 << 10;
+    static constexpr int SHIFT = 10;
+    static constexpr int LIMIT = 1 << SHIFT;
     std::shared_ptr<Table> table;
     std::size_t last_discard;
 
@@ -179,6 +180,7 @@ namespace player_impl {
           discards(K, false) {}
     Player(const Player&) = default;
     Player& operator=(const Player&) = default;
+    static constexpr int shift() { return SHIFT; }
     static constexpr int limit() { return LIMIT; }
     bool fulo() const { return fulo_count > 0; }
     void reset();

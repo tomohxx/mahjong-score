@@ -767,9 +767,14 @@ namespace player_impl {
 
   int Player::score(const int fu, const int han) const
   {
-    if (han == 0) return 0;
+    if (han == 0) {
+      return 0;
+    }
+    else if (han >= LIMIT) {
+      return (han >> SHIFT) * (wind1 == 27 ? 48000 : 32000);
+    }
 
-    int base = fu * (1 << (han + 2));
+    const int base = fu * (1 << (han + 2));
 
     if (base < 2000) {
       return less_than_2000(base);
